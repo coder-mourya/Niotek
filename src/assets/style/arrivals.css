@@ -1,0 +1,21 @@
+/* ProductLayout.css */
+.product-card img {
+    /* height: 200px; */
+    width: 400px;
+    object-fit: cover;
+  }
+  
+  .product-card p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 15px;
+    color: #333;
+  }
+ 
+  .product-card-2 .product-card img{
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .product-card-2 .product-card img:hover{
+    transform: scale(1.1);
+  }

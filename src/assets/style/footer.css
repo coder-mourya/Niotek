@@ -1,0 +1,63 @@
+.social-icons i {
+    font-size: 20px;
+  }
+
+  
+
+  
+.btn-square {
+    width: 36px;
+    height: 36px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.btn-sm-square {
+    width: 30px;
+    height: 30px;
+}
+
+.btn-lg-square {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+}
+
+.list-unstyled li{
+    list-style-type: none;
+}
+
+.list-unstyled li a {
+    text-decoration: none;
+    color: #D2D2D2;
+}
+
+.list-unstyled li{
+    margin : 1rem 0 0;
+}
+
+.list-unstyled li a:hover{
+    color: #007bff;
+}
+
+
+.footer-bottom a , .footer-bottom p {
+    color: #D2D2D2;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover{
+    color: #007bff;
+}
+
+.contact p {
+    color: #D2D2D2;
+}

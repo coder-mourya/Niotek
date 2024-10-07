@@ -1,0 +1,78 @@
+.category-card {
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    text-align: left; /* Align text to the left */
+    color: white;
+    /* padding: 20px; */
+    height: 300px;
+    display: flex; /* Use flexbox for centering */
+    /* flex-direction: column;  */
+    /* align-items: center;  */
+  }
+  
+  .category-card .product-image {
+    position: relative;
+    z-index: 2; /* Ensure product image stays on top */
+    object-fit: contain; /* Maintain aspect ratio */
+    margin-bottom: 10px; /* Space between image and text */
+  }
+
+ 
+  
+  .category-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem; /* Padding for the text */
+    z-index: 3;
+  }
+  
+  .category-overlay h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    z-index: 3;
+    text-align: left; /* Keep text aligned to the left */
+  }
+  
+  /* Gradient backgrounds for each card */
+  .gradient-bg-1 {
+    background: url('../Img/Ledback.png') no-repeat center center / cover;
+  }
+  
+  .gradient-bg-2 {
+    background: url('../Img//projector-back.png') no-repeat center center / cover;
+  }
+  
+  .gradient-bg-3 {
+    background: url('../Img/accback.png') no-repeat center center / cover;
+  }
+  
+  .gradient-bg-4 {
+    background: url('../Img//pannal-back.png') no-repeat center center / cover;
+  }
+  
+  .gradient-bg-5 {
+    background: url('../Img//converter-back.png') no-repeat center center / cover;
+  }
+  
+
+/* Apply the hover effect to the image when hovering on the container */
+.gradient-bg-1:hover img,
+.gradient-bg-2:hover img,
+.gradient-bg-3:hover img,
+.gradient-bg-4:hover img,
+.gradient-bg-5:hover img {
+    transform: scale(1.1); /* Scale image when hovering on the container */
+}
+
+/* Ensure smooth transitions */
+.gradient-bg-1 img,
+.gradient-bg-2 img,
+.gradient-bg-3 img,
+.gradient-bg-4 img,
+.gradient-bg-5 img {
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; /* Smooth transitions */
+}
