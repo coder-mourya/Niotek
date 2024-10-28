@@ -6,14 +6,31 @@
     margin-right: 1.5rem;
 }
 
-.Navbar-container .dropdown-item{
+.Navbar-container .dropdown a:hover {
+    color: rgb(100, 94, 94);
+}
+
+.Navbar-container .Partners a:hover {
+    color: rgb(100, 94, 94) !important;
+}
+
+.Navbar-container .dropdown-item {
     padding: 1rem;
     border-bottom: 0.5px solid #ccc;
     font-weight: 400 !important;
 }
 
+.Navbar-container .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+
 .carousel {
     z-index: 1;
+}
+
+.Navbar-container, .navbar-collapse {
+    transition: none !important;
 }
 
 
@@ -21,7 +38,8 @@
     margin-right: 5rem;
 }
 
-.navbar-nav  .dropdown-menu{
+.navbar-nav .dropdown-menu {
+    width: 250px;
     z-index: 1065;
     position: absolute;
     top: 100%;
@@ -38,19 +56,12 @@
     z-index: 1030;
     top: 0;
     background-color: #ffffff;
-    /* box-shadow: 0 4px 2px -2px gray; */
-    transition: height 0.3s ease-in-out;
     height: 90px;
-    /* overflow: hidden; */
 }
 
 
 .navbar-collapse {
-    /* z-index: 1; */
     position: relative;
-    transition: height 0.3s ease-in-out;
-    height: calc(350px - 90px);
-    /* overflow-y: auto; */
 }
 
 .navbar-collapse.show {
@@ -76,43 +87,27 @@
     .navbar-collapse {
         background-color: #ffffff;
         height: auto;
-        /* transition: height 0.3s ease-in-out; */
         z-index: 1031;
-        /* Dropdown appears on top */
+       
     }
 
     .navbar-collapse.show {
         position: fixed;
-        /* Ensure it doesn't overlap content */
         width: 100%;
+        height: 100vh;
         top: 90px;
-        /* Adjust to match your navbar's height */
         left: 0;
         z-index: 1031;
-        /* Keep dropdown above the content */
 
-    }
+    } 
 
-    /* Push the rest of the content down */
-    .carousel,
-    .product-section,
-    .arrivals-section,
-    .reviews-section {
-
-        transition: margin-top 0.3s ease-in-out;
-    }
-
-    .navbar-toggler[aria-expanded="true"]+.navbar-collapse {
-        max-height: calc(350px - 90px);
-       
-    }
 }
 
 
 
 /* banner control */
 
-.banner-control{
+.banner-control {
     width: 50px;
     height: 50px;
     background-color: #181818;
@@ -123,74 +118,210 @@
     font-size: 2px;
 } */
 
-.banner-text {
-    position: absolute;
-    top: 50%; /* Adjust to position vertically */
-    left: 40%; /* Adjust to position horizontally */
-    transform: translate(-50%, -50%); /* Centers the text */
-    color: white; /* Text color */
-    font-size: 8.75rem; /* Adjust font size as needed */
-    font-weight: bold;
-    font-family: "Manrope", sans-serif;
-    font-weight: 800;
+@keyframes slideInLeftToRight {
+    from {
+        opacity: 0;
+        transform: translateX(-100%); /* Start slightly below */
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0); /* End at original position */
+    }
 }
 
+.banner-text {
+    position: absolute;
+    top:30%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 6.25rem;
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    opacity: 0;
+}
+
+.banner-text.animateText {
+    animation: slideInLeftToRight 0.5s ease-in-out forwards;
+    animation-delay: 1s;
+}
+
+/* .text-box{
+    width: 20% !important;
+} */
 
 
-
-.carousel-control-prev{
+.carousel-control-prev {
     justify-content: start;
     padding-left: 1.5rem;
 }
 
-.carousel-control-next{
-    justify-content:  end;
+.carousel-control-next {
+    justify-content: end;
     padding-right: 1.5rem;
 }
 
-.banner-item{
+@keyframes slideInRightToLeft {
+    from {
+        opacity: 0;
+        transform: translateX(100%); /* Start slightly below */
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%, -50%); /* End at original position */
+    }
+}
+
+.banner-item {
     position: absolute;
-    top: 50%; /* Adjust to position vertically */
-    left: 75%; /* Adjust to position horizontally */
+    top: 50%;
+    left: 75%;
     width: 600px;
-    transform: translate(-50%, -50%); /* Centers the text */
-  
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.banner-item.animate {
+    animation: slideInRightToLeft 0.8s ease-in-out forwards;
+    animation-delay: 0.4s;
+}
+
+.pen-item {
+    width: 1000px;
+    top: 50%;
 }
 
 
-@media (max-width: 768px) {
 
-    .banner-control{
+.banner1 {
+    background-color: #1565BD;
+    background-image: url('../Img/NIO 2.png');
+    background-repeat: no-repeat;
+    background-position: start;
+    background-size: 50% cover;
+}
+
+.banner2 {
+    background-color: #481675;
+    background-image: url('../Img/pen-back.png');
+    background-repeat: no-repeat;
+    background-position: start;
+    background-size: 50% cover;
+}
+
+.banner3 {
+    background-color: #143952;
+    background-image: url('../Img/cable-back.png');
+    background-repeat: no-repeat;
+    background-position: start;
+    background-size: 50% cover;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .banner-control {
         width: 40px;
         height: 40px;
     }
-   
-    .banner-control span{
+
+    .banner-control span {
         width: 1rem;
     }
 
-    .carousel-control-prev{
-       
+    .carousel-control-prev {
+
         padding-left: 1rem;
     }
-    
-    .carousel-control-next{
-        
+
+    .carousel-control-next {
+
         padding-right: 1rem;
     }
 
     .banner-text {
-        font-size: 3rem; /* Smaller font for smaller screens */
+        font-size: 3rem;
+         top: 10%;
+        /* Smaller font for smaller screens */
     }
 
-    .banner-item{
+    .banner-item {
         position: absolute;
-        top: 50%; /* Adjust to position vertically */
-        left: 75%; /* Adjust to position horizontally */
-        width: 150px;
-        transform: translate(-50%, -50%); /* Centers the text */
-      
+        top: 50%;
+        /* Adjust to position vertically */
+        left: 75%;
+        /* Adjust to position horizontally */
+        width: 180px;
+        transform: translate(-50%, -50%);
+        /* Centers the text */
+
+    }
+
+    .pen-item {
+        width: 250px;
+        top: 55%;
     }
 
 
+}
+
+
+/* For tablets and small laptops */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .banner-control {
+        width: 35px;
+        height: 35px;
+    }
+
+    .banner-text {
+        font-size: 2.5rem;
+    }
+
+    .banner-item {
+        top: 50%;
+        left: 72%;
+        width: 130px;
+        transform: translate(-50%, -50%);
+    }
+
+    .pen-item {
+        width: 220px;
+        top: 50%;
+    }
+}
+
+
+
+
+/* contact offcanvas */
+.contact-offcanvas {
+    padding: 0.8rem 0.5rem !important;
+}
+
+.contact-offcanvas .offcanvas-body {
+    padding-top: 0 !important;
+    scrollbar-width: none !important;
+}
+
+.contact-offcanvas .contact label {
+    font-size: 12px;
+    font-weight: 400;
+    font-family: "Manrope", sans-serif;
+    margin-bottom: 3px;
+}
+
+.contact-offcanvas .contact input,
+.contact-offcanvas .contact textarea {
+    background-color: #E8F0F9;
+    padding: 0.7rem 0.5rem;
+}
+
+.contact-offcanvas .contact .form-control::placeholder {
+    color: #8E8E8E;
+}
+
+@media screen and (max-width: 768px) {
+    .contact-offcanvas{
+        width: 100% !important;
+    }
 }

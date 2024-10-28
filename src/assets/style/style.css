@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+.viosion-container {
+    background: url('../Img/bg.png') no-repeat center center / cover;
+    height: 370px;
+}
+
+.viosion-container h1 {
+    font-size: 56px;
+    font-weight: 600;
+    font-family: "Manrope", sans-serif;
+}
+
+
+/* about */
+.about-header {
+    margin-top: 5.5rem;
+    background-color: #052B55;
+    height: 250px;
+}
+
+.about-header h1,
+.about-content h1 {
+    font-size: 56px;
+    font-weight: 600;
+    color: #ffffff;
+    font-family: "Manrope", sans-serif;
+}
+
+.about-content {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+/* cameras  */
+
+.camera-header {
+    margin-top: 5.5rem;
+    background-color: #052B55;
+    height: 250px;
+    background-image: url('../Img/camera\ bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.camera-header h1 {
+    font-size: 56px;
+    font-weight: 600;
+    color: #ffffff;
+    font-family: "Manrope", sans-serif;
+}
+
+/* .camera-options{
+    overflow-x: auto;
+    white-space: nowrap;
+
+} */
+
+.camera-options button{
+    width: 270px;
+    min-width: 200px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 50px;
+    /* flex-shrink: 0; */
+}
+
+.download-btn{
+    background-color: #ffffff;
+}
+
+.download-btn:hover img{
+        filter: brightness(0) invert(1);
+}
+
+.PTZ4K img {
+    width: 250px;
+    /* padding-bottom: 1rem; */
+}
+
+.PTZ4K h2{
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Manrope", sans-serif;
+}
+
+.PTZ4K p{
+    font-family: "Manrope", sans-serif;
+}
+
+
+.resource-card {
+    background-color: #F3F7FB;
+    width: 270px;
+}
+
+.resource-card .item-image{
+    width: 200px;
+    aspect-ratio: 4/3;
+    transition: transform 0.3s ease-in-out;    
+}
+
+.resource-card .btn{
+    background-color: #ffffff;
+}
+
+.resource-card .btn:hover{
+    background-color: #1565BD;
+    color: #ffffff;
+}
+
+.resource-card .btn:hover img {
+    filter: brightness(0) invert(1); /* Makes the image appear white */
+}
+
+
+.resource-card:hover .item-image{
+    transform: scale(1.1);
+}
+
+.resource-card h4 {
+    font-size: 18px;
+    margin-top: 1rem;
+}
+
+.lion-image {
+    position: absolute;
+    top: 50%;
+    right: 50%; 
+}
+
+
+@media screen and (max-width: 768px) {
+    .viosion-container {
+        background-image: none;
+        background-color: #E8F0F9;
+        height: auto;
+    }
+
+    .about-header {
+        height: 200px;
+    }
+
+    .camera-header h1 {
+        font-size: 45px;
+
+    }
+
+    .about-header h1,
+    .about-content h1 {
+        font-size: 45px;
+    }
+
+    .camera-header {
+        height: 200px;
+    }
+
+    .PTZ4K h2{
+       margin-top: 2rem;
+    }
+
+    .lion-image {
+        position: static;
+ 
+    }
+
+}
+
+@media  screen and (min-width: 769px) and (max-width: 1024px) {
+    .viosion-container {
+        background-image: none;
+        background-color: #E8F0F9;
+        height: auto;
+    }
+
+    .about-header {
+        height: 200px;
+    }
+
+    .camera-header h1 {
+        font-size: 45px;
+
+    }
+
+    .about-header h1,
+    .about-content h1 {
+        font-size: 45px;
+    }
+
+    .camera-header {
+        height: 200px;
+    }
+
+    .PTZ4K h2{
+       margin-top: 2rem;
+    }
+
+}
+
+/* @media screen and (min-width: 1025px) and (max-width: 1284px), 
+screen and (min-resolution: 2dppx) and (max-width: 1284px) {
+    .viosion-container {
+        background: url('../Img/bg.png') no-repeat center center / cover;
+        background-color: #E8F0F9;
+        height: 300px;
+
+    }
+
+    .about-header {
+        height: 200px;
+    }
+
+    .camera-header h1 {
+        font-size: 45px;
+
+    }
+
+    .about-header h1,
+    .about-content h1 {
+        font-size: 45px;
+    }
+
+    .camera-header {
+        height: 200px;
+    }
+
+    .PTZ4K h2{
+       margin-top: 2rem;
+    }
+
+   
+} */

@@ -1,10 +1,10 @@
 import React from "react";
 import '../assets/style/product.css';
-import Led from "../assets/Img/Led.png";
 import pannal from "../assets/Img/pannal.png";
-import projector from "../assets/Img/projector.png";
-import accessories from "../assets/Img/acc.png"
-import converter from "../assets/Img/converter.png";
+import podium from "../assets/Img/podium.png";
+import camera from "../assets/Img/item cam.png";
+import cable from "../assets/Img/item cable.png";
+import pen from "../assets/Img/item pen.png";
 
 const Product = () => {
     return (
@@ -15,18 +15,14 @@ const Product = () => {
                     <div className="col-md-4">
                         <div className="category-card gradient-bg-1">
                             <div className="category-overlay">
-                                <h2>LED Displays</h2>
+                                <h2>Podium</h2>
                             </div>
 
-                            <img src={Led}
+                            <img src={podium}
                                 alt="LED Display"
-                                className="product-image"
+                                className="product-image image1-1"
 
-                                style={{
-                                    width: "26rem",
-                                    marginTop: "6rem",
-                                    marginRight: "1rem",
-                                }}
+                               
                             />
 
                         </div>
@@ -34,32 +30,22 @@ const Product = () => {
 
                     <div className="col-md-4">
                         <div className="category-card gradient-bg-2">
-                            <img src={projector} alt="Projector" className="product-image"
-                                style={{
-                                    width: "25rem",
-                                    marginTop: "6rem",
-                                    marginLeft: "1rem",
-                                }}
+                            <img src={camera} alt="Projector" className="product-image image1"
+                                
                             />
                             <div className="category-overlay">
-                                <h2>Projectors</h2>
+                                <h2>Camera UC-A100</h2>
                             </div>
                         </div>
                     </div>
 
                     <div className="col-md-4">
                         <div className="category-card gradient-bg-3">
-                            <img src={accessories} alt="Accessories" className="product-image"
-                                style={{
-                                    width: "19rem",
-                                    marginTop: "1rem",
-                                    marginBottom: "0",
-                                    marginLeft: "7rem",
-                                    marginRight: "0",
-                                }}
+                            <img src={cable} alt="Accessories" className="product-image image2"
+                               
                             />
                             <div className="category-overlay">
-                                <h2>Accessories</h2>
+                                <h2>HDMI <span style={{ fontSize: "20px", fontWeight: "400" }}>(upto 20m)</span></h2>
                             </div>
                         </div>
                     </div>
@@ -67,14 +53,8 @@ const Product = () => {
                     {/* Second row */}
                     <div className="col-md-6">
                         <div className="category-card gradient-bg-4">
-                            <img src={pannal} alt="Interactive Panel" className="product-image" 
-                             style={{
-                                width: "26.5rem",
-                                marginTop: "2.5rem",
-                                marginBottom: "0",
-                                marginLeft: "13.6rem",
-                                
-                            }}
+                            <img src={pannal} alt="Interactive Panel" className="product-image image3"
+                               
                             />
                             <div className="category-overlay">
                                 <h2>Interactive Panel</h2>
@@ -84,17 +64,11 @@ const Product = () => {
 
                     <div className="col-md-6">
                         <div className="category-card gradient-bg-5">
-                            <img src={converter} alt="Converters" className="product-image"
-                             style={{
-                                width: "23rem",
-                                marginTop: "2.7rem",
-                                marginBottom: "0",
-                                marginLeft: "16.7rem",
-                                
-                            }}
+                            <img src={pen} alt="Converters" className="product-image image4"
+                               
                             />
                             <div className="category-overlay">
-                                <h2>Converters</h2>
+                                <h2>Stylus Pen</h2>
                             </div>
                         </div>
                     </div>

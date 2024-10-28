@@ -1,6 +1,8 @@
 import React from 'react';
-import logo from '../assets/Img/Logo.png';
+import logo from '../assets/Img/Logo.svg';
 import '../assets/style/footer.css';
+import { Link } from 'react-router-dom';
+import lion from '../assets/Img/lion.svg'
 
 const Footer = () => {
     return (
@@ -14,7 +16,7 @@ const Footer = () => {
                         </div>
                         <p className='mt-4' style={{
                             width: "80%"
-                        }}>Leo elementum iaculis quam massa vitae odio sed. Morbi tincidunt senectus.</p>
+                        }}>Dreamers Shape the Future</p>
 
                         <div className="social-icons d-flex my-3">
                             <a href="/" className="text-gray-300 btn btn-square"><i class="fa-brands fa-facebook-f"></i></a>
@@ -22,13 +24,17 @@ const Footer = () => {
                             <a href="/" className="text-gray-300 btn btn-square"><i class="fa-brands fa-linkedin-in"></i></a>
                             <a href="/" className="text-gray-300 btn btn-square"><i class="fa-brands fa-instagram"></i></a>
                         </div>
+
+                        <div className='d-flex justify-content-start align-items-center  position-relative'>
+                            <img src={lion} alt="lion"  className='lion-image'/>
+                        </div>
                     </div>
 
                     {/* Links Section */}
                     <div className="col-md-2">
                         <h5>Links</h5>
                         <ul className="list-unstyled">
-                            <li><a href="/" >About Us</a></li>
+                            <li><Link to={'/about'}>About</Link></li>
                             <li><a href="/" >Solutions</a></li>
                             <li><a href="/" >Partners</a></li>
                             <li><a href="/" >Support</a></li>
@@ -53,15 +59,14 @@ const Footer = () => {
                     <div className="col-md-3 contact">
 
                         <p className='py-0 mb-0'>DM us on:</p>
-                        <p className='pt-0 text-light' ><a href="mailto:rajesh.mishra@niotek.in" className="text-light text-decoration-none">rajesh.mishra@niotek.in</a></p>
+                        <p className='pt-0 text-light' ><a href="mailto:info@niotek.in" className="text-light text-decoration-none">info@niotek.in</a></p>
 
                         <p className='py-0 mb-0'>Call us on:</p>
-                        <p className='pt-0 text-light'><a href="tel:+919811008554" className="text-light text-decoration-none">+91 9811008554</a></p>
+                        <p className='pt-0 text-light'><a href="tel:+919717992260" className="text-light text-decoration-none">+91 9717992260</a></p>
 
                         <p>Find us: <br />
                             <span className='text-light'>
-                                Altf Co-Working 101, NH-19, CRRI, 3rd Floor<br />
-                                Unit No: 339 Ishwar Nagar, Okhla, New Delhi 110044
+                                AltF Coworking 101, NH-19, CRRI, 3rd Floor, Unit no.339, Ishwar Nagar, Okhla, New Delhi-110044
                             </span>
                         </p>
                     </div>
