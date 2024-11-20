@@ -12,7 +12,7 @@ const Product = () => {
             <div className="container " >
                 <div className="row g-4">
                     {/* First row */}
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-lg-4 col-xl-4 ">
                         <div className="category-card gradient-bg-1">
                             <div className="category-overlay">
                                 <h2>Podium</h2>
@@ -28,7 +28,7 @@ const Product = () => {
                         </div>
                     </div>
 
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-lg-4 col-xl-4 ">
                         <div className="category-card gradient-bg-2">
                             <img src={camera} alt="Projector" className="product-image image1"
                                 
@@ -39,13 +39,13 @@ const Product = () => {
                         </div>
                     </div>
 
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-lg-4 col-xl-4">
                         <div className="category-card gradient-bg-3">
                             <img src={cable} alt="Accessories" className="product-image image2"
                                
                             />
                             <div className="category-overlay">
-                                <h2>HDMI <span style={{ fontSize: "20px", fontWeight: "400" }}>(upto 20m)</span></h2>
+                                <h2> Cables & Connectors</h2>
                             </div>
                         </div>
                     </div>

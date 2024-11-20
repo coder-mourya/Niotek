@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from "../assets/Img/Logo.svg";
 import "../assets/style/navbar.css";
 import { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+// import { useForm, ValidationError } from '@formspree/react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { fetchCategories } from '../redux/categorySlice';
+import { BassUrl } from '../utils/BassUrl';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
-
-
-
     const [isExpanded, setIsExpanded] = useState(false);
-
     const closeNavbar = () => setIsExpanded(false);
+    const categories = useSelector(state => state.category.categories);
+    // console.log("categories", categories);
+    const Navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, [dispatch]);
 
 
     // Function to handle hover to open dropdown
@@ -58,17 +72,116 @@ const Navbar = () => {
         setShowSales(false);
     }
 
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        mobile: '',
+        companyName: '',
+        message: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+
+    // const formRef = useRef(null);
+    // const handleFormSubmit = async (event) => {
+    //     event.preventDefault(); // Prevents page reload on form submit
+
+    //     const formData = new FormData(formRef.current);
+    //     const formObject = Object.fromEntries(formData.entries());
+
+    //     try {
+    //         const response = await fetch("https://formspree.io/f/movqjzqp", {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify(formObject),
+    //         });
+
+    //         if (response.ok) {
+    //             toast.success("Form submitted successfully!");
+    //             setFormData({
+    //                 name: '',
+    //                 email: '',
+    //                 number: '',
+    //                 companyName: '',
+    //                 message: ''
+    //             });
+    //             handleCloseSales();
+    //         } else {
+    //             toast.error("Error submitting form. Please try again later.");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //         toast.error("Error submitting form. Please try again later.");
+    //     }
+    // };
+
+    const handleFormSubmit = async () => {
+        const url = BassUrl();
+        const data = {
+            name: formData.name,
+            email: formData.email,
+            mobile: formData.mobile,
+            companyName: formData.companyName,
+            message: formData.message
+        }
+
+        console.log("data send", data);
+
+        try {
+            const response = await axios.post(`${url}/api/enquiry`, data)
+
+            if (response.status === 200) {
+                toast.success("Form submitted successfully!");
+                setFormData({
+                    name: '',
+                    email: '',
+                    mobile: '',
+                    companyName: '',
+                    message: ''
+                });
+                handleCloseSales();
+            }
+        } catch (error) {
+            if (error.response) {
+                // The server responded with a non-2xx status
+                toast.error(error.response.data.message || "Something went wrong");
+                console.log(error.response.data);
+
+            } else if (error.request) {
+                // The request was made but no response was received
+                toast.error("No response from server. Please try again.");
+            } else {
+                // Other errors (e.g., setup issues)
+                toast.error("Error in making the request.");
+            }
+        }
+    }
+
+    const handleCategoryClick = (category) => {
+        console.log("category", category);
+        
+            closeNavbar();
+            Navigate(`/categoryDashbord`,  { state: { category } });
+    }
+
+
     return (
         <div className={`Navbar-container`}  >
-            <nav className="navbar navbar-expand-lg navbar-light "
+            <nav className="navbar navbar-expand-lg  navbar-light "
                 style={{
                     height: "90px",
                     backgroundColor: "#ffffff",
                 }}
             >
-                <div className="container-fluid">
+                <div className="container-fluid ">
                     {/* Logo on the left side */}
-                    <a className="navbar-brand " href="/" style={{ marginLeft: "5rem" }} >
+                    <a className="navbar-brand " href="/"
+
+                    >
                         <img
                             src={logo}
                             alt="Logo"
@@ -92,10 +205,12 @@ const Navbar = () => {
                     </button>
 
                     {/* Navbar items on the right side */}
-                    <div className={`collapse navbar-collapse ${isExpanded ? 'show' : ''}`} id="navbarNav">
-                        <ul className="navbar-nav ms-auto me-auto">
+                    <div className={`collapse  navbar-collapse ${isExpanded ? 'show' : ''}`} id="navbarNav">
+
+
+                        <ul className="navbar-nav  ms-auto">
                             {/* Products Dropdown */}
-                            <li className="nav-item dropdown " onMouseEnter={handleHover} onMouseLeave={handleLeave}>
+                            <li className="nav-item dropdown " onMouseEnter={handleHover} onClick={handleHover} onMouseLeave={handleLeave}>
                                 <a
                                     className="nav-link "
                                     href="/"
@@ -106,18 +221,23 @@ const Navbar = () => {
                                 >
                                     Products <i className="fa-solid fa-chevron-down"></i>
                                 </a>
-                                <ul className="dropdown-menu" aria-labelledby="productsDropdown">
-                                    <li><Link to={"/cameras"} className="dropdown-item" onClick={closeNavbar}>Cameras</Link></li>
-                                    <li><a className="dropdown-item" href="/">Displays</a></li>
-                                    <li><a className="dropdown-item" href="/">Accessories</a></li>
-                                    <li><a className="dropdown-item" href="/">Audio</a></li>
-                                    {/* <li><a className="dropdown-item" href="/">Capture Systems</a></li>
-                                    <li><a className="dropdown-item" href="/">Accessories</a></li>
-                                    <li><a className="dropdown-item" href="/">Software</a></li> */}
+                                <ul className="dropdown-menu category-list" aria-labelledby="productsDropdown">
+
+                                    {categories?.filter((item) => item.isActive) // Only include active categories
+                                        .map((item) => (
+                                            <li key={item.id} className='dropdown-item' onClick={() => handleCategoryClick(item)} style={{cursor:"pointer"}}> 
+                                                {/* <Link to={"/cameras"} className="dropdown-item" onClick={closeNavbar}>
+                                                    {item?.name}
+                                                </Link> */}
+                                                {item?.name}
+                                            </li>
+                                        ))}
+
+
                                 </ul>
                             </li>
                             {/* Solutions Dropdown */}
-                            <li className="nav-item dropdown" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
+                            <li className="nav-item dropdown" onMouseEnter={handleHover} onClick={handleHover} onMouseLeave={handleLeave}>
                                 <a
                                     className="nav-link "
                                     href="/"
@@ -219,7 +339,8 @@ const Navbar = () => {
                 </Offcanvas.Header>
                 <Offcanvas.Body >
                     <div className="contact">
-                        <form className="form ">
+                        <ToastContainer />
+                        <form className="form" >
                             <div className="form-group">
                                 <label htmlFor="name" className='form-label'>Name:</label>
                                 <input
@@ -228,7 +349,11 @@ const Navbar = () => {
                                     name="name"
                                     className='form-control'
                                     placeholder='Enter your name'
+                                    onChange={handleChange}
+                                    value={formData.name}
+                                    required
                                 />
+
                             </div>
                             <div className="form-group">
                                 <label className='form-label' htmlFor="email">Email address:</label>
@@ -238,17 +363,25 @@ const Navbar = () => {
                                     name="email"
                                     placeholder='Enter your email'
                                     className='form-control'
+                                    onChange={handleChange}
+                                    value={formData.email}
+                                    required
                                 />
+
                             </div>
                             <div className="form-group">
                                 <label className='form-label' htmlFor="mobile">Mobile number:</label>
                                 <input
                                     type="number"
-                                    id="number"
-                                    name="number"
+                                    id="mobile"
+                                    name="mobile"
                                     placeholder='Enter your number'
                                     className='form-control'
+                                    onChange={handleChange}
+                                    value={formData.mobile}
+                                    required
                                 />
+
                             </div>
 
                             <div className="form-group">
@@ -259,7 +392,11 @@ const Navbar = () => {
                                     name="companyName"
                                     className='form-control'
                                     placeholder='Enter your company name'
+                                    onChange={handleChange}
+                                    value={formData.companyName}
+                                    required
                                 />
+
                             </div>
 
                             <div className="form-group">
@@ -268,18 +405,24 @@ const Navbar = () => {
                                     id="message"
                                     name="message"
                                     rows="5"
-
                                     className='form-control'
                                     placeholder='Enter your message'
+                                    required
+                                    onChange={handleChange}
+                                    value={formData.message}
                                 ></textarea>
+
                             </div>
+
                         </form>
                     </div>
                 </Offcanvas.Body>
                 <div>
+
                     <div className='d-flex justify-content-center' style={{ marginBottom: "5rem" }}>
-                        <button className='btn btn-primary' style={{ width: "100%" }}>Submit</button>
+                        <button className='btn btn-primary' onClick={handleFormSubmit} style={{ width: "100%" }}>Submit</button>
                     </div>
+
                     <hr />
                     <div className='d-flex row '>
                         <div className='text-center col-6' style={{ borderRight: "1px solid #D9D9D9" }}>

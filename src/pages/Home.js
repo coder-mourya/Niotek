@@ -1,104 +1,79 @@
-import React from "react";
-// import banner from "../assets/Img/banner.png";
+import React, { useEffect } from "react";
 import Product from "../components/Product";
 import Arrivals from "../components/Arrivals";
 // import Reviews from "../components/Reviews";
 import "../assets/style/navbar.css";
-// import { useState, useEffect } from "react";
-import itemPic from "../assets/Img/NIO 1.png"
 import bannerBack from "../assets/Img/banner-back.png"
-import pen from "../assets/Img/pen.png";
-import cable from "../assets/Img/cable.png";
-import "../assets/style/style.css"
-// import {bubbleCursor} from 'cursor-effects';
+import "../assets/style/style.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchBanners } from "../redux/bannerSlice";
+
 
 const Home = () => {
-    // const [marginTop, setMarginTop] = useState("90px");
-    // const [isAnimating, setIsAnimating] = useState(false);
-
-    // Dynamically adjust margin based on the navbar's expanded state
-    // useEffect(() => {
-    //     if (isNavbarExpanded) {
-    //         setMarginTop("350px"); // Adjust this value based on the expanded navbar
-    //     } else {
-    //         setMarginTop("90px"); // Default margin when navbar is collapsed
-    //     }
-    // }, [isNavbarExpanded]);
+    const dispatch = useDispatch();
+    const banners = useSelector((state) => state.banner.banners);
+    console.log("banners", banners);
 
 
-    //  useEffect(() => {
-    //     setIsAnimating(true);
-    //     const timer = setTimeout(() => setIsAnimating(false), 1000); 
-    //     return () => clearTimeout(timer);
-    // }, [isAnimating]);
+    useEffect(() => {
+        dispatch(fetchBanners());
+    }, [dispatch])
 
-
-  
-  
-
+    const activeBanners = banners?.filter((banner) => banner.isActive) // Only active banners
+        .sort((a, b) => Number(a.sequence) - Number(b.sequence));
 
     return (
-        <div className="home" style={{  transition: "margin-top 0.3s ease-in-out" }}>
+        <div className="home" style={{ transition: "margin-top 0.3s ease-in-out" }}>
             {/* Carousel Section */}
             <div
                 id="carouselExampleIndicators"
                 className="carousel slide "
                 data-bs-ride="carousel"
-                data-bs-interval="2000"
-
+                data-bs-interval="3000"
                 style={{ marginTop: "90px" }}
             >
                 {/* Carousel inner with images */}
                 <div className="carousel-inner">
-                    
-                <div className="carousel-item active position-relative banner3">
-                        <img src={bannerBack} className="d-block w-100" alt="Slide 3" />
 
-                        <div className="text-box">
-                            <h1 className="position-absolute banner-text animateText">
-                                HDMI <br />
-                                CABLE
-                            </h1>
-                        </div>
+                    {activeBanners?.map((banner, index) => (
 
-                        <div 
-                        // className="animate__animated animate__fadeInUp"
+                        <div key={index} className={`carousel-item   position-relative banner1 ${banner?.sequence === "1" ? "active" : ""}`}
+                            style={{
+                                backgroundColor: banner?.color
+                            }}
                         >
-                            <img src={cable} alt="item" className="position-absolute banner-item animate" style={{ top: "55%" }} />
-                        </div>
 
-                    </div>
-                   
-                    <div className="carousel-item active position-relative banner2">
-                        <img src={bannerBack} className="d-block w-100" alt="Slide 2" />
-                        <div className="text-box">
-                            <h1 className="position-absolute banner-text animateText" >
-                                Stylus  <br /> Pen
-                            </h1>
-                        </div>
+                            <div>
 
-                        <div 
-                        // className="animate__animated animate__fadeInUp"
-                        >
-                            <img src={pen} alt="item" className="position-absolute banner-item  pen-item animate" />
-                        </div>
+                                <img src={banner?.image} style={{
+                                    width: "60%",
+                                    objectFit: "cover",
+                                    position: "absolute",
+                                    top: "0",
+                                    left: "0",
+                                    opacity: "0.4"
+                                }} alt="background" />
+                            </div>
 
-                    </div>
+                            <img src={bannerBack} className="d-block w-100" alt="Slide 1"  style={{zIndex: "100"}}/>
 
-                     <div className="carousel-item active position-relative banner1">
-                        <img src={bannerBack} className="d-block w-100" alt="Slide 1" />
-                        <div className="text-box">
-                            <h1 className="position-absolute banner-text animateText">
-                                UC-100 <br /> Camera
-                            </h1>
-                        </div>
+                            <div className="text-box">
+                                <h1 className="position-absolute banner-text animateText" style={{ width: "350px", textTransform: "uppercase" }}>
+                                    {banner?.title}
+                                </h1>
+                            </div>
 
-                        <div 
-                        // className="animate__animated animate__fadeInUp"
-                        >
-                            <img src={itemPic} alt="item" className="position-absolute banner-item animate" />
+                            <div>
+                                <img src={banner?.image} alt="item"
+                                    className="position-absolute banner-item animate"
+                                    // style={{ width: "500px", objectFit: "cover" }}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    ))
+
+                    }
 
                 </div>
 
@@ -137,15 +112,58 @@ const Home = () => {
                         <h1>VISION</h1>
                     </div>
 
-                   <div className="d-flex justify-content-center">
-                   <div className="text-center container" >
-                        <p>NIOTEK vision is to work in sync with INDIA’s vision of Digital India to provide high-quality MADE In INDIA products to Indian and global markets. We believe in our motto that “Dreamers Shape the Future” and we are determined to stand true by it.
-                        </p>
-                        <p>NIOTEK works closely with and for – Government Projects, System Integrators, Partners, Complementing Brands - in various Business Verticals such as Government, Enterprise Corporates, IT, Infra, Health, Hospitality, Institutions, with the objective to strengthen the space of Unified Communication.</p>
+                    <div className="d-flex justify-content-center">
+                        <div className="text-center container" >
+                            <p>NIOTEK vision is to work in sync with INDIA’s vision of Digital India to provide high-quality MADE In INDIA products to Indian and global markets. We believe in our motto that “Dreamers Shape the Future” and we are determined to stand true by it.
+                            </p>
+                            <p>NIOTEK works closely with and for – Government Projects, System Integrators, Partners, Complementing Brands - in various Business Verticals such as Government, Enterprise Corporates, IT, Infra, Health, Hospitality, Institutions, with the objective to strengthen the space of Unified Communication.</p>
+                        </div>
                     </div>
-                   </div>
                 </div>
             </section>
+
+
+
+            {/* 
+           
+            <Model show={show} onHide={handleClose} centered>
+               
+                <div style={{ position: 'relative', padding: '0', backgroundColor: 'white', borderRadius: '10px' }}>
+                   
+                    <button
+                        onClick={handleClose}
+                        style={{
+                            position: 'absolute',
+                            top: '-10px',  // Moves the button up a bit from the image
+                            right: '-10px', // Moves the button to the right edge of the modal
+                            backgroundColor: 'white',
+                            border: '2px solid #ddd',
+                            borderRadius: '50%',
+                            width: '30px',
+                            height: '30px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                            fontSize: '18px',
+                            boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
+                            color: '#333',
+                            fontWeight: 'bold'
+                        }}
+                    >
+                        &times;
+                    </button>
+
+                    <div className="d-flex justify-content-center align-items-center">
+                        <img src={Diwali} className="rounded" alt="diwali" style={{ width: '100%', borderRadius: '8px' }} />
+                    </div>
+                </div>
+            </Model>
+           */}
+
+
+
+
 
 
 

@@ -7,7 +7,7 @@ import Reviews from './components/Reviews';
 import Footer from './components/Footer';
 import { useState } from 'react';
 import About from './components/About';
-import Camera from './components/Camera';
+import CategoryDashbord from './components/CategoryDashbord';
 import Resource from './components/Resource';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Route exact path='/arrivals' element={<Arrivals />} />
         <Route exact path='/reviews' element={<Reviews />} />
         <Route exact path='/about' element={<About />} />
-        <Route exact path='/cameras' element={<Camera />} />
+        <Route exact path='/categoryDashbord' element={<CategoryDashbord />} />
         <Route exact path='/resources' element={<Resource />} />
       </Routes>
       <Footer />
