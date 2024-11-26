@@ -8,7 +8,20 @@ const categorySchema = new mongoose.Schema({
     isActive: {
         type: Boolean,
         default: true
-    }
+    },
+
+    subcategories: [
+        {
+            name: {
+                type: String,
+                required: true
+            },
+            isActive: {
+                type: Boolean,
+                default: true
+            }
+        }
+    ]
 });
 
 const Category = mongoose.model("Category", categorySchema);

@@ -4,7 +4,7 @@ const upload = require("../config/s3");
 // upload product
 
 const uploadProduct = async (req, res) => {
-    const { name, description, category, isActive } = req.body;
+    const { name, description, category, subcategory, isActive } = req.body;
 
     // Check required fields
     if(!name){
@@ -42,6 +42,7 @@ const uploadProduct = async (req, res) => {
             name,
             description,
             category,
+            subcategory,
             isActive: isActive || true, // Default to true if not provided
             file: fileUrl,
             image: imageUrl

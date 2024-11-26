@@ -167,7 +167,7 @@ const updateBannerStatus = async (req, res) => {
 
 
 const editBanner = async (req, res) => {
-    console.log("Request body:", req.body);
+    // console.log("Request body:", req.body);
 
     const { id } = req.params; // Banner ID
     const { title, sequence, color } = req.body;

@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes")
 const textRoutes = require("./routes/allRoutes")
 const cors = require("cors")
 
+
 const app = express()
 const PORT = process.env.PORT || 5000
 

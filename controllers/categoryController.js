@@ -3,20 +3,31 @@ const mongoose = require("mongoose");
 
 // create category
 const createCategory = async (req, res) => {
-    const { name } = req.body;
+    const { name, subcategories  } = req.body;
 
     if (!name) {
         return res.status(400).send({ message: "Name is required" });
     }
 
+    if (subcategories && subcategories.length > 4) {
+        return res.status(400).send({ message: "Maximum of 4 subcategories are allowed" });
+    }
+
     try {
-        const category = new Category({ name });
+        const category = new Category({ 
+            name,
+            subcategories: subcategories || []
+         });
+
         await category.save();
         res.status(200).send({ message: "Category created successfully", category });
     } catch (error) {
         res.status(500).send({ message: "Failed to create category", error });
     }
 }
+
+
+
 
 // get all categories
 const getAllCategories = async (req, res) => {
@@ -75,20 +86,28 @@ const deleteCategory = async (req, res) => {
 
 const editCategory = async (req, res) => {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, subcategories } = req.body;
 
     if(!name){
-        return res.status(400).send({ message: "Name is required" });
+        return res.status(400).send({ message: "category Name is required" });
     }
 
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(400).send({ message : "Invalid category ID format."})
     }
 
+    if (subcategories && subcategories.length > 4) {
+        return res.status(400).send({ message: "A maximum of 4 subcategories is allowed." });
+    }
+
     try {
         const updateCategory = await Category.findByIdAndUpdate(
             id,
-            {name},
+            {
+                name,
+                subcategories: subcategories || undefined
+            },
+            
             {new : true, omitUndefined : true}
         
         )
@@ -107,10 +126,14 @@ const editCategory = async (req, res) => {
     }
 }
 
+
+
+
 module.exports = {
     createCategory,
     getAllCategories,
     updateCategoryStatus,
     deleteCategory,
-    editCategory
+    editCategory,
+    
 };

@@ -2,6 +2,7 @@
 const mongoose  = require("mongoose");
 const Enquiry = require("../models/enquiry");
 const Pages = require("../models/pages");
+const sanitizeHtml = require('sanitize-html');
 
 // Controller for handling enquiry uploads
 const uploadEnquiry = async (req, res) => {
@@ -69,11 +70,22 @@ const creatPage = async (req, res) => {
   }
 
 
+   // Sanitize description to allow only safe HTML
+   const sanitizedDescription = sanitizeHtml(discription, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['h1', 'h2', 'span', 'b', 'i', 'u', 'strong', 'em', 'p']),
+    allowedAttributes: {
+      a: ['href', 'target'],
+      img: ['src', 'alt'],
+      '*': ['style'], // Allow styles on any tag
+    },
+  });
+  
+
   try {
 
     const page = new Pages({
       title,
-      discription
+      discription : sanitizedDescription
     })
 
     await page.save();

@@ -1,4 +1,4 @@
-// routes/textRoutes.js
+// routes/ all routes
 const express = require('express');
 const router = express.Router();
 const textController = require('../controllers/textController');
@@ -6,6 +6,7 @@ const bannerController = require('../controllers/bannerController');
 const upload = require('../config/s3');
 const productController = require('../controllers/productController');
 const categoryController = require('../controllers/categoryController');
+const {sendEmail} = require('../controllers/mailController');
 
 
 // Route to handle enquiry uploads
@@ -39,4 +40,29 @@ router.get('/category', categoryController.getAllCategories);
 router.delete('/category/:id', categoryController.deleteCategory);
 router.patch('/category/status/:id', categoryController.updateCategoryStatus);
 router.patch('/category/:id', categoryController.editCategory);
+
+// mail sender 
+
+router.post('/send-email', async (req, res) => {
+    const { fromEmail, toEmails, subject, message } = req.body;
+
+    // Validate request body
+    if (!fromEmail || !toEmails || !subject || !message) {
+        return res.status(400).json({ error: "All fields are required" });
+    }
+
+    try {
+        const result = await sendEmail(fromEmail, toEmails, subject, message);
+        if (result.success) {
+            return res.status(200).json({ message: "Email sent successfully", messageId: result.messageId });
+        } else {
+            return res.status(500).json({ error: result.error });
+        }
+    } catch (error) {
+        console.error("Error in email route:", error.message);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
 module.exports = router;
