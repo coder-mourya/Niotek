@@ -11,6 +11,13 @@
     font-family: "Manrope", sans-serif;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+
+
 
 /* about */
 .about-header {
@@ -129,6 +136,11 @@
     position: absolute;
     top: 50%;
     right: 50%; 
+}
+
+.html-container p {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 

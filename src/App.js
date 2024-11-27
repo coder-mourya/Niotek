@@ -9,6 +9,9 @@ import { useState } from 'react';
 import About from './components/About';
 import CategoryDashbord from './components/CategoryDashbord';
 import Resource from './components/Resource';
+// import PagesDashbord from './components/PagesDashbord';
+import TermsAndConditions from './components/TermsAndConditions';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 function App() {
   const [isNavbarExpanded, setIsNavbarExpanded] = useState(false);
@@ -24,6 +27,9 @@ function App() {
         <Route exact path='/about' element={<About />} />
         <Route exact path='/categoryDashbord' element={<CategoryDashbord />} />
         <Route exact path='/resources' element={<Resource />} />
+        {/* <Route exact path='/pagesDashbord' element={<PagesDashbord />} /> */}
+        <Route exact path='/termsAndConditions' element={<TermsAndConditions />} />
+        <Route exact path='/privacyPolicy' element={<PrivacyPolicy />} />
       </Routes>
       <Footer />
     </>

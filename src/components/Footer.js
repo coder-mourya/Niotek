@@ -3,8 +3,20 @@ import logo from '../assets/Img/Logo.svg';
 import '../assets/style/footer.css';
 import { Link } from 'react-router-dom';
 import lion from '../assets/Img/lion.svg'
+import { useNavigate } from 'react-router-dom';
+
 
 const Footer = () => {
+    const Navigate = useNavigate();
+
+    const handleClick = (type) => {
+        if(type === 'Terms and Conditions'){
+            Navigate('termsAndConditions')
+        }else{
+            Navigate('privacyPolicy')
+        }
+    }
+    
     return (
         <footer className="footer  text-light py-5" style={{ backgroundColor: "#000000" }}>
             <div className="container">
@@ -76,8 +88,8 @@ const Footer = () => {
                 <div className="row mt-4 footer-bottom">
                     <div className="col d-flex justify-content-between">
                         <p >© 2024 Niotek. All rights reserved.</p>
-                        <div>
-                            <a href="/" >Terms & Conditions</a> | <a href="/">Privacy Policy</a>
+                        <div className='terms-policy'>
+                            <span onClick={() => handleClick('Terms and Conditions')}>Terms & Conditions</span> | <span onClick={() => handleClick('privacy policy')}>Privacy Policy</span>
                         </div>
                     </div>
                 </div>

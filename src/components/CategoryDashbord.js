@@ -8,29 +8,38 @@ import { fetchProducts } from "../redux/productSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
+
 const CategoryDashbord = () => {
-    const [selectedOption, setSelectedOption] = useState("PTZ 4K");
     const location = useLocation();
     const category = location?.state?.category;
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
-    // console.log("catgory in dashbord",category);
-    console.log("products in dashbord", products);
 
+    console.log("catgory in dashbord", category);
+    console.log("products in dashbord", products);
 
     useEffect(() => {
         dispatch(fetchProducts());
     }, [dispatch]);
 
-    const handleOptionsChange = (option) => {
-        setSelectedOption(option);
-    };
+    const [selectedSubcategory, setSelectedSubcategory] = useState(
+        category?.subcategories?.[0]?.name || ""
+    );
 
-    const PTZ4K = () => {
+    const handleSubcategoryChange = (subcategoryName) => {
+        setSelectedSubcategory(subcategoryName);
+    }
+
+
+    const renderProducts = () => {
+      
         const filteredProducts = products?.filter(
-            (product) => product.category === category?.name
+            (product) => product.category === category?.name && product.isActive && selectedSubcategory === product?.subcategory
         );
-    
+
+        console.log("filteredProducts", filteredProducts);
+        
+
         return (
             <div className="container PTZ4K mb-5">
                 {filteredProducts.length > 0 ? (
@@ -43,11 +52,11 @@ const CategoryDashbord = () => {
                             <div className="col-md-4 d-flex justify-content-center align-items-center">
                                 <img src={product?.image} alt="camera" />
                             </div>
-    
+
                             <div className="col-md-8">
                                 <h2 style={{ textTransform: "capitalize" }}>{product?.name}</h2>
                                 <p>{product?.description}</p>
-    
+
                                 <div className="mt-4 d-flex justify-content-center justify-content-md-start">
                                     <a
                                         href={product?.file}
@@ -68,70 +77,16 @@ const CategoryDashbord = () => {
                     ))
                 ) : (
                     <div className="text-center">
-                        <h2>No products found for this category.</h2>
+                        <h2>No active products found for this category.</h2>
                     </div>
                 )}
             </div>
         );
     };
-    
 
-    const FSD = () => {
-        return (
-            <div className="container PTZ4K mb-5" >
+   
 
-                <div className="text-center">
-                    <h2>coming soon</h2>
-                </div>
-
-
-
-            </div>
-        );
-    };
-
-    const UCVideoBar = () => {
-        return (
-            <div className="container PTZ4K mb-5" >
-
-                <div className="text-center">
-                    <h2>coming soon</h2>
-                </div>
-
-
-
-            </div>
-        );
-    };
-
-    const WebCam = () => {
-        return (
-            <div className="container PTZ4K mb-5" >
-
-                <div className="text-center">
-                    <h2>coming soon</h2>
-                </div>
-
-
-
-            </div>
-        );
-    };
-
-    const renderSelectedComponent = () => {
-        switch (selectedOption) {
-            case "PTZ 4K":
-                return <PTZ4K />;
-            case "FSD":
-                return <FSD />;
-            case "UC Video Bar":
-                return <UCVideoBar />;
-            case "Web Cam":
-                return <WebCam />;
-            default:
-                return null;
-        }
-    };
+ 
 
     return (
         <div className="camera">
@@ -141,23 +96,25 @@ const CategoryDashbord = () => {
 
             <div className="container camera-contant">
                 <div className="camera-options d-flex justify-content-center mt-5 row ">
-                    <button onClick={() => handleOptionsChange("PTZ 4K")} className={`btn mb-3 col ${selectedOption === "PTZ 4K" ? "btn-primary" : "btn-outline-secondary"}`}>
-                        PTZ 4K
-                    </button>
-                    <button onClick={() => handleOptionsChange("FSD")} className={`btn col mb-3 ${selectedOption === "FSD" ? "btn-primary" : "btn-outline-secondary"}`}>
-                        FHD
-                    </button>
-                    <button onClick={() => handleOptionsChange("UC Video Bar")} className={`btn col mb-3 ${selectedOption === "UC Video Bar" ? "btn-primary" : "btn-outline-secondary"}`}>
-                        UC Video Bar
-                    </button>
-                    <button onClick={() => handleOptionsChange("Web Cam")} className={`btn col mb-3 ${selectedOption === "Web Cam" ? "btn-primary" : "btn-outline-secondary"}`}>
-                        Web Cam
-                    </button>
+                    {category?.subcategories?.map((sub) => (
+                        <button
+                            key={sub?._id}
+                            onClick={() => handleSubcategoryChange(sub?.name)}
+                            className={`btn mb-3 col ${selectedSubcategory === sub?.name
+                                    ? "btn-primary"
+                                    : "btn-outline-secondary"
+                                }`}
+                        >
+                            {sub?.name}
+                        </button>
+                    ))
+
+                    }
                 </div>
             </div>
 
             <div className="camera-content container mt-5">
-                {renderSelectedComponent()}
+                {renderProducts()}
             </div>
         </div>
     );

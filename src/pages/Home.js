@@ -21,7 +21,9 @@ const Home = () => {
     }, [dispatch])
 
     const activeBanners = banners?.filter((banner) => banner.isActive) // Only active banners
-        .sort((a, b) => Number(a.sequence) - Number(b.sequence));
+        ?.sort((a, b) => Number(a.sequence) - Number(b.sequence));
+
+        const defaultActiveSequence = activeBanners?.[0]?.sequence;
 
     return (
         <div className="home" style={{ transition: "margin-top 0.3s ease-in-out" }}>
@@ -38,7 +40,7 @@ const Home = () => {
 
                     {activeBanners?.map((banner, index) => (
 
-                        <div key={index} className={`carousel-item   position-relative banner1 ${banner?.sequence === "1" ? "active" : ""}`}
+                        <div key={index} className={`carousel-item   position-relative banner1 ${banner?.sequence === defaultActiveSequence ? "active" : ""}`}
                             style={{
                                 backgroundColor: banner?.color
                             }}
@@ -59,7 +61,7 @@ const Home = () => {
                             <img src={bannerBack} className="d-block w-100" alt="Slide 1"  style={{zIndex: "100"}}/>
 
                             <div className="text-box">
-                                <h1 className="position-absolute banner-text animateText" style={{ width: "350px", textTransform: "uppercase" }}>
+                                <h1 className="position-absolute banner-text animateText" style={{ width: "350px", textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)"  }}>
                                     {banner?.title}
                                 </h1>
                             </div>

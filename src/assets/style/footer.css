@@ -82,3 +82,11 @@
 .contact p {
     color: #D2D2D2;
 }
+
+.terms-policy span {
+    cursor: pointer;
+}
+
+.terms-policy span:hover{
+    color: #007bff;
+}
